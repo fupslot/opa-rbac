@@ -1,0 +1,31 @@
+{
+    "roles": {
+        "admin": {
+            "permissions": [
+                "overview",
+                "person.edit"
+            ],
+            "includes": ["developer"]
+        },
+        "developer": {
+            "permissions": [
+                "overview.view"
+            ],
+            "includes": ["user"]
+        },
+        "user": {
+            "includes": [],
+            "permissions": ["person.view", "roles.view"]
+        }
+    },
+    "users": {
+        "alice": {
+            "id": 1,
+            "role": "admin"
+        },
+        "bob": {
+            "id": 2,
+            "role": "developer"
+        }
+    }
+}
