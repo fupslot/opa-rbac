@@ -7,4 +7,4 @@ COPY package.json yarn.lock ./
 RUN yarn install
 COPY . .
 
-CMD [ "node", "index.js" ]
+CMD [ "./node_modules/.bin/nodemon", "index.js" ]

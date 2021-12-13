@@ -2,8 +2,16 @@ package rbac
 
 default allow = false
 
+read { input.method == "GET" }
+
 allow {
 	permissions[data.users[input.user].role][_] == input.action
+}
+
+allow {
+	read
+	input.token == "TOKEN12345678"
+	input.path = [ "documents", "abc" ]
 }
 
 role_graph[role] = includes {

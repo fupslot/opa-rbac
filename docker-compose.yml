@@ -31,6 +31,8 @@ services:
     volumes:
       - /app/node_modules
       - ./node-authorizer/index.js:/app/index.js
+    environment:
+      - OPA_ENDPOINT=http://opa:8181/v1/data/rbac/allow
   bundle_server:
     image: nginx:1.20.0-alpine
     ports:
