@@ -1,5 +1,36 @@
 version: '2'
 services:
+  gateway:
+    image: kong/kong-gateway:2.6.0.2-alpine
+    container_name: gateway
+    volumes:
+      - ./gateway/kong.yml:/usr/local/kong/declarative/kong.yml
+    environment:
+      - KONG_DATABASE=off
+      - KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative/kong.yml
+      - KONG_PROXY_ACCESS_LOG=/dev/stdout
+      - KONG_ADMIN_ACCESS_LOG=/dev/stdout
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_ERROR_LOG=/dev/stdout
+      - KONG_ADMIN_LISTEN=0.0.0.0:8001
+      - KONG_ADMIN_GUI_URL=http://localhost:8002/
+    ports:
+      - 8000:8000
+      - 8443:8443
+      # Admin API Port: 8001
+      # https://docs.konghq.com/gateway/2.6.x/admin-api
+      - 8001:8001
+      - 8444:8444
+      - 8002:8002
+      - 8445:8445
+    healthcheck:
+      test: ["CMD","kong","health"]
+      interval: 10s
+      timeout: 3s
+      retries: 60
+    depends_on:
+      - authorizer 
+    
   opa:
     image: openpolicyagent/opa:0.35.0-rootless
     ports:
@@ -23,7 +54,7 @@ services:
     build: 
       context: ./node-authorizer
       dockerfile: Dockerfile.dev
-    container_name: node-authorizer
+    container_name: authorizer
     init: true
     restart: always
     ports:
@@ -42,3 +73,20 @@ services:
       - ./node-authorizer/nginx/proxy.conf:/etc/nginx/proxy.conf
       - ./node-authorizer/nginx/authorizer.conf:/etc/nginx/conf.d/authorizer.conf
       - ./bundles:/usr/share/nginx/html/bundles
+  # postgresql:
+  #   image: postgres
+  #   environment:
+  #     - POSTGRES_PASSWORD=
+  #     - POSTGRES_DB=cache
+  #   healthcheck:
+  #     test: ["CMD", "pg_isready"]
+  #     interval: 1s
+  #     timeout: 3s
+  #     retries: 30
+  # redis:
+  #   image: redis
+  #   healthcheck:
+  #     test: ["CMD", "redis-cli", "ping"]
+  #     interval: 1s
+  #     timeout: 3s
+  #     retries: 30

@@ -60,3 +60,9 @@ Query
 ```
 curl http://localhost:8080/api/api
 ```
+
+## Start Fake JSON API
+
+```
+json-server --watch ./example/api.json
+```
