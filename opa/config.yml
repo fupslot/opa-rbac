@@ -1,0 +1,17 @@
+services:
+  nginx:
+    url: http://bundle_server
+
+bundles:
+  rbac:
+    service: nginx
+    resource: bundles/rbac.tar.gz
+ 
+  # Error: Bundle activation failed: detected overlapping roots in 
+  # bundle manifest with: [rbac]
+  # authz:
+  #   service: nginx
+  #   resource: bundles/authz.tar.gz
+
+decision_logs:
+  console: true

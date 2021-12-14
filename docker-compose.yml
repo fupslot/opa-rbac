@@ -34,22 +34,22 @@ services:
   opa:
     image: openpolicyagent/opa:0.35.0-rootless
     ports:
-    - 8181:8181
+      - 8181:8181
+    volumes:
+      - ./opa/config.yml:/config.yml
     # WARNING: OPA is NOT running with an authorization policy configured. This
     # means that clients can read and write policies in OPA. If you are
     # deploying OPA in an insecure environment, be sure to configure
     # authentication and authorization on the daemon. See the Security page for
     # details: https://www.openpolicyagent.org/docs/security.html.
     command:
-    - "run"
-    - "--server"
-    - "--log-format=json-pretty"
-    - "--set=decision_logs.console=true"
-    - "--set=services.nginx.url=http://bundle_server"
-    - "--set=bundles.nginx.service=nginx"
-    - "--set=bundles.nginx.resource=bundles/rbac.tar.gz"
+      - "run"
+      - "--server"
+      - "-c"
+      - "/config.yml"
+      - "--log-format=json-pretty"
     depends_on:
-    - bundle_server
+      - bundle_server
   authorizer:
     build: 
       context: ./node-authorizer
@@ -73,6 +73,8 @@ services:
       - ./node-authorizer/nginx/proxy.conf:/etc/nginx/proxy.conf
       - ./node-authorizer/nginx/authorizer.conf:/etc/nginx/conf.d/authorizer.conf
       - ./bundles:/usr/share/nginx/html/bundles
+    depends_on:
+      - authorizer
   # postgresql:
   #   image: postgres
   #   environment:

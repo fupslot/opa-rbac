@@ -1,0 +1,10 @@
+{
+    "channels": {
+        "default": {
+            "members": ["john.doe"]
+        },
+        "sales": {
+            "members": ["john.doe"]
+        }
+    }
+}
