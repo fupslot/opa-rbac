@@ -1,0 +1,4 @@
+{
+    "revision": "0.0.2",
+    "roots": ["roles","users","channels", "channel", "rbac"]
+}

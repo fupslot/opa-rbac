@@ -1,0 +1,8 @@
+{
+    "default": {
+        "members": ["john.doe"]
+    },
+    "sales": {
+        "members": ["john.doe", "alice.doe"]
+    }
+}

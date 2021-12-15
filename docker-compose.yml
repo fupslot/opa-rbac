@@ -1,8 +1,8 @@
 version: '2'
 services:
   gateway:
-    image: kong/kong-gateway:2.6.0.2-alpine
     container_name: gateway
+    image: kong/kong-gateway:2.6.0.2-alpine
     volumes:
       - ./gateway/kong.yml:/usr/local/kong/declarative/kong.yml
     environment:
@@ -32,6 +32,7 @@ services:
       - authorizer 
     
   opa:
+    container_name: opa
     image: openpolicyagent/opa:0.35.0-rootless
     ports:
       - 8181:8181
@@ -51,10 +52,10 @@ services:
     depends_on:
       - bundle_server
   authorizer:
+    container_name: authorizer
     build: 
       context: ./node-authorizer
       dockerfile: Dockerfile.dev
-    container_name: authorizer
     init: true
     restart: always
     ports:
@@ -65,6 +66,7 @@ services:
     environment:
       - OPA_ENDPOINT=http://opa:8181/v1/data/rbac/allow
   bundle_server:
+    container_name: nginx
     image: nginx:1.20.0-alpine
     ports:
       - 8080:8080

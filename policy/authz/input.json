@@ -1,6 +1,0 @@
-{
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJqb2huLmRvZSIsImlhdCI6MTUxNjIzOTAyMn0.q5RYlP3WY_qBtHQUkcPerscwsbM-K8niqNWFiEH11kw",
-    "username":"john.doe",
-    "path": "/channels/default",
-    "method": "GET"
-}

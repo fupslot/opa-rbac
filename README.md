@@ -1,4 +1,4 @@
-Downaload OPA latest release
+Download OPA latest release
 
 ```
 https://github.com/open-policy-agent/opa/releases
@@ -66,3 +66,7 @@ curl http://localhost:8080/api/api
 ```
 json-server --watch ./example/api.json
 ```
+
+## Rego policy examples
+- https://github.com/DataDog/security-agent-policies
+- https://github.com/raspbernetes/k8s-security-policies

@@ -1,12 +1,23 @@
 services:
-  nginx:
+  - name: nginx
     url: http://bundle_server
 
+# Using this configuration, OPA will download bundles from
+# http://bundle_server/bundles/rbac.tar.gz
+# 
+# Refer to Bundle Service API docs for more details
+# https://www.openpolicyagent.org/docs/v0.11.0/bundles/#bundle-service-api
 bundles:
   rbac:
-    service: nginx
     resource: bundles/rbac.tar.gz
- 
+    service: nginx
+    polling:
+      min_delay_seconds: 10
+      max_delay_seconds: 20
+  # channel:
+  #   resource: bundles/channel.tar.gz
+  #   service: nginx
+    
   # Error: Bundle activation failed: detected overlapping roots in 
   # bundle manifest with: [rbac]
   # authz:

@@ -1,4 +1,4 @@
-package authz
+package channel
 
 import data.channels
 
@@ -6,10 +6,9 @@ token = {"payload": payload} { io.jwt.decode(input.token, [_, payload, _]) }
 
 user_owns_token { input.username == token.payload.username }
 
-
 default allow = false
 
-debug = value { value:=split(trim_prefix(input.path, "/"), "/") }
+# debug = value { value:=split(trim_prefix(input.path, "/"), "/") }
 
 allow {
     some channel

@@ -1,6 +1,8 @@
 OPA:=./opa_linux_amd64
+RBAC_BUNDLE_NAME:=rbac.tar.gz
 
 .PHONY: bundle
 bundle:
-	$(OPA) build ./policy/rbac/policy.rego ./policy/rbac/data.json --output=./bundles/rbac.tar.gz
-	$(OPA) build ./policy/authz/policy.rego ./policy/authz/data.json --output=./bundles/authz.tar.gz
+	rm -rf ./bundles/*
+	tar -czf ./bundles/${RBAC_BUNDLE_NAME} -C ./policy/rbac .
+	tar -tf ./bundles/${RBAC_BUNDLE_NAME}

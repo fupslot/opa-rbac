@@ -1,0 +1,19 @@
+{
+    "admin": {
+        "permissions": [
+            "overview",
+            "person.edit"
+        ],
+        "includes": ["developer"]
+    },
+    "developer": {
+        "permissions": [
+            "overview.view"
+        ],
+        "includes": ["user"]
+    },
+    "user": {
+        "includes": [],
+        "permissions": ["person.view", "roles.view"]
+    }
+}

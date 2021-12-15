@@ -1,0 +1,14 @@
+{
+    "alice": {
+        "id": 1,
+        "role": "admin"
+    },
+    "bob": {
+        "id": 2,
+        "role": "developer"
+    },
+    "chuck": {
+        "id": 3,
+        "role": "sale"
+    }
+}
