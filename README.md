@@ -1,3 +1,12 @@
+## Disclamer
+
+This repository is a playground where I'm testing new technology and writing POCs to test out the ideas.
+
+---
+
+
+## Open Policy Engine
+
 Download OPA latest release
 
 ```
