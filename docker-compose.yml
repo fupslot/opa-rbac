@@ -77,6 +77,12 @@ services:
       - ./bundles:/usr/share/nginx/html/bundles
     depends_on:
       - authorizer
+  rtdb:
+    container_name: rtdb
+    image: rethinkdb:2.4.1
+    ports:
+    - "8081:8080"
+    - "28015:28015"
   # postgresql:
   #   image: postgres
   #   environment:
