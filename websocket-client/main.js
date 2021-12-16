@@ -1,5 +1,6 @@
 import './style.css'
 
+const date = document.getElementById('date')
 
 let attempt = 0
 let attemptTimeout = null
@@ -64,7 +65,7 @@ function try_socket () {
   })
   
   ws.onmessage = ({ data }) => {
-    console.log(data)
+    date.innerText = data
   }
 }
 
