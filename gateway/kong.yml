@@ -71,7 +71,7 @@ _transform: true
 # it must be specified as a top-level entity, and not through
 # nesting.
 
-# plugins:
+plugins:
 # - name: rate-limiting
 #   consumer: example-user
 #   service: another-service
@@ -82,6 +82,10 @@ _transform: true
 #   tags:
 #   - extra_limits
 #   - my_tag
+  - name: kong-plugin-custom
+    config:
+      method: POST
+      url: "http://authorizer:9000/authorize"
 
 services:
   - name: api
@@ -90,6 +94,8 @@ services:
       - name: api 
         paths:
           - /api/*
+    plugins:
+    - name: kong-plugin-custom 
 
 consumers:
   - username: api

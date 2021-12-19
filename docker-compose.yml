@@ -5,6 +5,7 @@ services:
     image: kong/kong-gateway:2.6.0.2-alpine
     volumes:
       - ./gateway/kong.yml:/usr/local/kong/declarative/kong.yml
+      - ./gateway/kong/plugins:/usr/local/kong/plugins
     environment:
       - KONG_DATABASE=off
       - KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative/kong.yml
@@ -14,6 +15,9 @@ services:
       - KONG_ADMIN_ERROR_LOG=/dev/stdout
       - KONG_ADMIN_LISTEN=0.0.0.0:8001
       - KONG_ADMIN_GUI_URL=http://localhost:8002/
+      # - KONG_LOG_LEVEL=debug
+      - KONG_LUA_PACKAGE_PATH=/usr/local/?.lua;;
+      - KONG_PLUGINS=kong-plugin-custom
     ports:
       - 8000:8000
       - 8443:8443
